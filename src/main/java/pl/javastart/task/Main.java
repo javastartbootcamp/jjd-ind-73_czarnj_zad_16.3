@@ -57,11 +57,11 @@ public class Main {
             char operation = PLUS;
             int timeUnitIndex = 0;
             if (indexOfMinus == -1 || indexOfPlus != -1 && indexOfPlus < indexOfMinus) {
-                number = getTimeNumberFromString(timeShift.substring(indexOfPlus+1));
+                number = getTimeNumberFromString(timeShift.substring(indexOfPlus + 1));
                 operation = PLUS;
                 timeUnitIndex = indexOfPlus + Integer.toString(number).length() + 1;
             } else if (indexOfPlus == -1 || indexOfMinus != -1 && indexOfMinus < indexOfPlus) {
-                number = getTimeNumberFromString(timeShift.substring(indexOfMinus+1));
+                number = getTimeNumberFromString(timeShift.substring(indexOfMinus + 1));
                 operation = MINUS;
                 timeUnitIndex = indexOfMinus + Integer.toString(number).length() + 1;
             }
