@@ -50,25 +50,12 @@ public class Main {
 
     private LocalDateTime calculateDateFromNow(String timeShift) {
         LocalDateTime now = LocalDateTime.now();
-        int indexOfPlus = timeShift.indexOf(PLUS);
-        int indexOfMinus = timeShift.indexOf(MINUS);
-        while (indexOfPlus != -1 || indexOfMinus != -1) {
-            int number = 0;
-            char operation = PLUS;
-            int timeUnitIndex = 0;
-            if (indexOfMinus == -1 || indexOfPlus != -1 && indexOfPlus < indexOfMinus) {
-                number = getTimeNumberFromString(timeShift.substring(indexOfPlus + 1));
-                operation = PLUS;
-                timeUnitIndex = indexOfPlus + Integer.toString(number).length() + 1;
-            } else if (indexOfPlus == -1 || indexOfMinus != -1 && indexOfMinus < indexOfPlus) {
-                number = getTimeNumberFromString(timeShift.substring(indexOfMinus + 1));
-                operation = MINUS;
-                timeUnitIndex = indexOfMinus + Integer.toString(number).length() + 1;
-            }
+        while (!timeShift.isEmpty()) {
+            int number = getTimeNumberFromString(timeShift.substring(1));
+            char operation = timeShift.charAt(0);
+            int timeUnitIndex = Integer.toString(number).length() + 1;
             now = calculateLocalDateTime(operation, number, timeShift.charAt(timeUnitIndex), now);
             timeShift = timeShift.substring(timeUnitIndex + 1);
-            indexOfPlus = timeShift.indexOf(PLUS);
-            indexOfMinus = timeShift.indexOf(MINUS);
         }
         return now;
     }
